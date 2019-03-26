@@ -11,7 +11,7 @@ When a new user connect to the server, they either get an available app (a free 
 ## How to 
 
 ``` 
-git clone http:
+git clone https://github.com/ColinFay/haddock.git
 cd haddock
 ```
 
