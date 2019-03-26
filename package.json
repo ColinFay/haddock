@@ -1,0 +1,9 @@
+{
+    "name": "haddock",
+    "version": "0.0.1",
+    "dependencies": {
+        "socket.io": "~2.2"
+    },
+    "author": "Colin Fay <contact@colinfay.me>",
+    "description": "A Node server for Shiny Apps."
+}
