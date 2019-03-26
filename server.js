@@ -1,19 +1,22 @@
-var http = require('http');
-var shiny = require('./shinylauncher');
+const http = require('http');
+const shiny = require('./shinylauncher');
+const YAML = require('yaml')
+const fs = require('fs')
+const file = YAML.parse(fs.readFileSync('./config.yml', 'utf8'))
 
 // list available ports
-var available = [1234, 1235]
-var port_server = 8080
+var available = file["app"]["available"]
+var port_server = file["app"]["port_server"] 
 
-shiny.launchShinyApps("prenomsapp::run_app()", available)
+shiny.launchShinyApps(file["app"]["cmd"], available)
 
 var server = http.createServer(function(req, res) {
 	if (req.url != '/favicon.ico') {
 		if (available.length == 0){
             shiny.noPort(
                 res,
-                title = "My Shiny App", 
-                message = "No available port"
+                title = file["app"]["title"], 
+                message = file["app"]["no_port"]
             )
 		} else {
 			var port = available.shift();
@@ -21,7 +24,7 @@ var server = http.createServer(function(req, res) {
             shiny.genPage(
                 res,
                 port,
-                title = "My Shiny App", 
+                title = file["app"]["title"], 
                 port_server 
             );	
 		}

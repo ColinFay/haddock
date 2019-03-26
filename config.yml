@@ -1,0 +1,6 @@
+app:
+  available: [1234, 1235]
+  port_server: 8080
+  cmd: "prenomsapp::run_app()"
+  title: "My Shiny App"
+  no_port: "No port available"

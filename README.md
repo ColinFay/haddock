@@ -12,6 +12,13 @@ What happens in the background is that the Node JS app keeps track of the "avail
 
 ## How to use haddock
 
+Install deps
+
+```
+npm install yaml
+npm install socket.io
+```
+
 ### Getting the project
 
 First, `git clone` the project on your server.
@@ -23,20 +30,20 @@ cd haddock
 
 ### Config
 
-In the `server.js` file, you can change several parameters: 
+Change things in the `config.yml` file: 
 
 + available ports
 
 ```
-var available = [1234, 1235]
+available: [1234, 1235]
 ```
 
-List here all the ports you want to open (one shiny app will be launched by port listed here).
+An array of all the ports you want to open (one shiny app will be launched by port listed here).
 
-+ launchShinyApps
++ cmd
 
 ```
-shiny.launchShinyApps("prenomsapp::run_app()", available)
+cmd: "prenomsapp::run_app()"
 ```
 
 The cmd element (here `prenomsapp::run_app()`) is the command used to launch the Shiny App with a command line call. In the background, it will be passed to `R -e "{cmd}"`. It can be either a call to a package that launch the app, or a `shiny::runApp(/folder/to/app.R)`. Well, in fact it can be any kind of R code as long as it can be passed to `R -e "{cmd}"`. 
@@ -44,25 +51,21 @@ The cmd element (here `prenomsapp::run_app()`) is the command used to launch the
 + Content & Message of webpage 
 
 ```
-shiny.noPort(
-	title = "My Shiny App", 
-	message = "No available port"
-)
+title: "My Shiny App"
 ```
 
-This piece of code defines the title + sentence displayed when there is no port available. You can also change the title of the main page serving the apps:
+This piece of code defines the title displayed on the pages
 
 ```
-shiny.genPage(
-	port, 
-	title = "My Shiny App"
-)
+no_port: "No port available"
 ```
+
+Sentence displayed when there is no port available.
 
 + Port of the server 
 
 ```
-var port_server = 8080
+port_server: 8080
 ```
 
 This port is the port used to access the node app. 
@@ -82,8 +85,6 @@ Then go to your browser and open at the port you've specified on `server.listen`
 ### Near future 
 
 + Today, the node app doesn't launch any new shiny app when there is no port available. That should be made possible. Then, the user could define a number of open ports at launch, then a threshold, and when the threshold of available port is reached, new shiny processes are launched. 
-
-+ Config should be made through a YAML / JSON file, so that the user just has to define the parameters here
 
 + The server should be able to host multiple Shiny Apps. 
 
