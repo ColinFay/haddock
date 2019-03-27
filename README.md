@@ -101,7 +101,9 @@ Then go to your browser and open at the port you've specified on `server.listen`
 
 ### Should I use it in production? 
 
-Of course you shouldn't. This is just a Proof Of Concept and won't be production ready until a significant amount of work. 
+Of course you shouldn't. This is just a Proof Of Concept and won't be production ready until a significant amount of work (that is to say probably never).
+
+For a production environment, please refer to [Shiny Server](https://www.rstudio.com/products/shiny/shiny-server/).
 
 ### The Node code seems weird
 
